@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const userRoutes = require('./routes/UserRoutes');
+const newProduct = require('./routes/ProductRoutes');
 
 
 const app = express();
@@ -19,6 +20,7 @@ mongoose.connect(mongoURI)
 
 app.use(bodyParser.json());
 app.use('/api', userRoutes);
+app.use('/api', newProduct);
 
 
 app.listen(port, () => {
