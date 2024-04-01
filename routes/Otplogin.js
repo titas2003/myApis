@@ -1,6 +1,16 @@
 const otpGenerator = require('otp-generator');
 const User = require('../model/User');
 
+
+function generateOTP() {
+    // Define the characters to be used for OTP
+    const digits = '0123456789';
+    let otp = '';
+    for (let i = 0; i < 6; i++) {
+      otp += digits.charAt(Math.floor(Math.random() * digits.length));
+    }
+    return otp;
+  }
 // Endpoint to request OTP
 async function requestOTP(req, res) {
   const { phone } = req.body;
@@ -13,7 +23,8 @@ async function requestOTP(req, res) {
     }
 
     // Generate OTP
-    const otp = otpGenerator.generate(6, { digits: true, alphabets: false, upperCase: false, specialChars: false });
+    const otp = generateOTP();
+    // const otp = otpGenerator.generate(6, { alphabets: false, upperCase: false, specialChars: false, digits: true });
 
     // In a real application, you would send the OTP via SMS or email
     console.log(`Generated OTP for user ${user._id}: ${otp}`);
