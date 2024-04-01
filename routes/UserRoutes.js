@@ -4,13 +4,13 @@ const bcrypt = require('bcrypt');
 const User = require('../model/User');
 
 router.post('/register', async (req,res) => {
-    const { username, email, password} = req.body;
+    const { username, email, phone, password} = req.body;
 
-    if(!username || !email || !password) {
+    if(!username || !email || !phone || !password) {
         return res.status(400).json({ error: 'Please provide data'})
     }
     try {
-        const existignUser = await User.findOne({ $or: [{username},{email}] });
+        const existignUser = await User.findOne({ $or: [{username},{phone}] });
         if(existignUser) {
             return res.status(400).json({ error: 'User already exists'})
         }
@@ -20,6 +20,7 @@ router.post('/register', async (req,res) => {
         const newUser = new User({
             username,
             email,
+            phone,
             password: hashedPassword
           });
       

@@ -3,13 +3,14 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const userRoutes = require('./routes/UserRoutes');
 const newProduct = require('./routes/ProductRoutes');
+const { requestOTP, verifyOTP } = require('./routes/Otplogin');
 
 
 const app = express();
 const port = 3000;
 
 app.get('/', (req,res) => {
-    res.send("Shanu+Smita but shanu boudibaaaz...jomi kere nae...upen er jomir aam kheye nae..Shanu payel k valobase...payel sanjay k valobase...sanjay smita k valobase...smita sobaike valobase...vaja vaja");
+    res.send("Thank you for reaching us");
 })
 
 const mongoURI = 'mongodb+srv://admin:admin@cluster01.j2cmld8.mongodb.net/?retryWrites=true&w=majority&appName=cluster01';
@@ -21,6 +22,8 @@ mongoose.connect(mongoURI)
 app.use(bodyParser.json());
 app.use('/api', userRoutes);
 app.use('/api', newProduct);
+app.post('/request-otp', requestOTP);
+app.post('/verify-otp', verifyOTP);
 
 
 app.listen(port, () => {
