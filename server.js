@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const userRoutes = require('./routes/UserRoutes');
 const newProduct = require('./routes/ProductRoutes');
 const { requestOTP, verifyOTP } = require('./routes/Otplogin');
+const { requestemailOTP, verifyemailOTP } = require('./routes/Otpemail');
 
 
 const app = express();
@@ -24,6 +25,8 @@ app.use('/api', userRoutes);
 app.use('/api', newProduct);
 app.post('/request-otp', requestOTP);
 app.post('/verify-otp', verifyOTP);
+app.post('/request-email-otp', requestemailOTP);
+app.post('/verify-email-otp', verifyemailOTP);
 
 
 app.listen(port, () => {
