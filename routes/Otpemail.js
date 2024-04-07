@@ -29,10 +29,10 @@ async function requestemailOTP(req, res) {
 
         // Nodemailer configuration
         const transporter = nodemailer.createTransport({
-            service: 'Gmail', // Use your email service provider
+            service: 'gmail', // Use your email service provider
             auth: {
                 user: 'nomail02024@gmail.com', // Your email address
-                pass: '2003@Tima' // Your email password
+                pass: 'rkkr oshm xaun cawk' // Your email password
             }
         });
 

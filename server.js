@@ -5,6 +5,7 @@ const userRoutes = require('./routes/UserRoutes');
 const newProduct = require('./routes/ProductRoutes');
 const { requestOTP, verifyOTP } = require('./routes/Otplogin');
 const { requestemailOTP, verifyemailOTP } = require('./routes/Otpemail');
+const sendMail = require('./controller/sendMail');
 
 
 const app = express();
@@ -27,6 +28,7 @@ app.post('/request-otp', requestOTP);
 app.post('/verify-otp', verifyOTP);
 app.post('/request-email-otp', requestemailOTP);
 app.post('/verify-email-otp', verifyemailOTP);
+app.get('/mail', sendMail);
 
 
 app.listen(port, () => {
