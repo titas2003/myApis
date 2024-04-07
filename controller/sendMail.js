@@ -1,29 +1,30 @@
 const nodemailer = require("nodemailer");
 const { getMaxListeners } = require("../model/User");
+const transporter = require('./mailConf');
 
 const sendMail = async (req, res) => {
 
     let testAccount = await nodemailer.createTestAccount();
     //Connectwith SMTP Etherial
-    const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        // port: 587,
-        // auth: {
-        //     user: 'yasmine.jones70@ethereal.email',
-        //     pass: 'dJhPrNVwhrmgTZ4wEt'
-        // }
-        auth: {
-            user: 'nomail02024@gmail.com',
-            pass: 'rkkr oshm xaun cawk'
-        }
-    });
+    // const transporter = nodemailer.createTransport({
+    //     service: 'gmail',
+    //     // port: 587,
+    //     // auth: {
+    //     //     user: 'yasmine.jones70@ethereal.email',
+    //     //     pass: 'dJhPrNVwhrmgTZ4wEt'
+    //     // }
+    //     auth: {
+    //         user: 'nomail02024@gmail.com',
+    //         pass: 'rkkr oshm xaun cawk'
+    //     }
+    // });
 
     let info = await transporter.sendMail({
         from: '"Titas Majumder 👻" <titas@gmail.com>', // sender address
         to: "titas20031996@gmail.com", // list of receivers
-        subject: "Hello ✔", // Subject line
+        subject: "Hello Titas ✔", // Subject line
         text: "Hello world?", // plain text body
-        html: "<b>Hello world?</b>", // html body
+        html: "<b>Hello world Titas?</b>", // html body
     });
     console.log("Message sent: %s", info.messageId);
 

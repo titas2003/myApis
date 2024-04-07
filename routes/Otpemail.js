@@ -1,6 +1,6 @@
 const otpGenerator = require('otp-generator');
 const User = require('../model/User');
-const nodemailer = require('nodemailer');
+const transporter = require('../controller/mailConf');
 
 
 function generateOTP() {
@@ -28,13 +28,13 @@ async function requestemailOTP(req, res) {
         // const otp = otpGenerator.generate(6, { alphabets: false, upperCase: false, specialChars: false, digits: true });
 
         // Nodemailer configuration
-        const transporter = nodemailer.createTransport({
-            service: 'gmail', // Use your email service provider
-            auth: {
-                user: 'nomail02024@gmail.com', // Your email address
-                pass: 'rkkr oshm xaun cawk' // Your email password
-            }
-        });
+        // const transporter = nodemailer.createTransport({
+        //     service: 'gmail', // Use your email service provider
+        //     auth: {
+        //         user: 'nomail02024@gmail.com', // Your email address
+        //         pass: 'rkkr oshm xaun cawk' // Your email password
+        //     }
+        // });
 
         // Email options
         const mailOptions = {

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../model/User');
+const transporter = require('../controller/mailConf');
 
 router.post('/register', async (req, res) => {
     const { username, email, phone, password } = req.body;
@@ -24,6 +25,7 @@ router.post('/register', async (req, res) => {
             phone,
             password: hashedPassword
         });
+        const name = username;
 
         const savedUser = await newUser.save();
         res.status(201).json(savedUser);
@@ -36,6 +38,25 @@ router.post('/register', async (req, res) => {
         // const seconds = now.getSeconds().toString().padStart(2, '0');
         // const timestamp = `${year}${month}${day} ${hours}:${minutes}:${seconds}`;
         // console.log(timestamp, ": user", username, " Registered, from ",clientIP)
+        const mailOptions = {
+            from: 'nomail02024@gmail.com',
+            to: email,
+            subject: 'Welcome to Stark Industries',
+            text: `Dear ${name},\n\nThank you for registering to Stark Industries.\nI am Jarvis.\nYou have been successfully secured your membership with Stark Industries.\n\nThanks and Regards\nTony Stark,\nPROVE THAT TONY STARK\nHAS A HEART.`
+        };
+
+        // Sending the email
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.log(error);
+                res.status(500).send('Failed to send Register mail');
+            } else {
+                console.log('Email sent: ' + info.response);
+                res.status(200).send('Register mail sent');
+            }
+        });
+
+
     } catch (error) {
         console.error('Error registering user:', error);
         res.status(500).json({ error: 'Error registering user' });
